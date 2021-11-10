@@ -2,6 +2,12 @@
   <div class="corpo">
     <h1 class="centralizado">{{titulo}}</h1>
 
+    <input
+      type="search"
+      class="filtro"
+      placeholder="filtre por parte do titulo"
+      v-on:input="filtro = $event.target.value"
+    />
     <ul class="lista-fotos">
       <li class="lista-fotos-item" :key="foto.id" v-for="foto of fotos">
 
@@ -61,26 +67,8 @@ export default {
     width: 100%;
   }
 
-  /* estilo do painel */
-
-   .painel {
-    padding: 0 auto;
-    border: solid 2px grey;
-    display: inline-block;
-    margin: 5px;
-    box-shadow: 5px 5px 10px grey;
-    width: 200px;
-    height: 100%;
-    vertical-align: top;
-    text-align: center;
-  }
-
-  .painel .painel-titulo {
-    text-align: center;
-    border: solid 2px;
-    background: lightblue;
-    margin: 0 0 15px 0;
-    padding: 10px;
-    text-transform: uppercase;
+  .filtro {
+    display: block;
+    width: 100%;
   }
 </style>
