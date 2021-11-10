@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import api from './services/api'
+
 export default {
   data() {
     return {
@@ -20,9 +22,8 @@ export default {
   },
 
   created() {
-    this.$http.get('http://localhost:3000/v1/fotos')
-      .then(response => response.json())
-      .then(fotos => this.fotos = fotos, error => console.log(error))
+    api.get('/fotos')
+      .then(res => this.fotos = res.data, error => console.log(error))
   }
 };
 </script>
