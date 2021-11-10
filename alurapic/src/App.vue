@@ -6,13 +6,13 @@
       type="search"
       class="filtro"
       placeholder="filtre por parte do titulo"
-      v-on:input="filtro = $event.target.value"
+      @input="filtro = $event.target.value"
     />
     <ul class="lista-fotos">
       <li class="lista-fotos-item" :key="foto.id" v-for="foto of fotosComFiltro">
 
         <meu-painel :titulo="foto.titulo">
-            <img class="img-response" :src="foto.url" :alt="foto.alt" />
+            <imagem-responsiva :url="foto.url" :titulo="foto.titulo" />
         </meu-painel>
 
       </li>
@@ -23,11 +23,13 @@
 <script>
 import api from './services/api'
 import Painel from './components/shared/painel/Painel.vue'
+import ImagemResponsiva from './components/shared/imagem-responsiva/ImagemResponsiva.vue'
 
 export default {
 
   components: {
-    'meu-painel' : Painel
+    'meu-painel' : Painel,
+    'imagem-responsiva' : ImagemResponsiva
   },
 
   data() {
@@ -76,10 +78,6 @@ export default {
 
   .lista-fotos .lista-fotos-item {
     display: inline-block;
-  }
-
-  .img-response {
-    width: 100%;
   }
 
   .filtro {
