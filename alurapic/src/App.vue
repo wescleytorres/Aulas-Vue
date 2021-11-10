@@ -9,7 +9,7 @@
       v-on:input="filtro = $event.target.value"
     />
     <ul class="lista-fotos">
-      <li class="lista-fotos-item" :key="foto.id" v-for="foto of fotos">
+      <li class="lista-fotos-item" :key="foto.id" v-for="foto of fotosComFiltro">
 
         <meu-painel :titulo="foto.titulo">
             <img class="img-response" :src="foto.url" :alt="foto.alt" />
@@ -34,6 +34,19 @@ export default {
     return {
       titulo: 'Alurapic',
       fotos: [],
+      filtro: ''
+    }
+  },
+
+  computed: {
+
+    fotosComFiltro() {
+      if(this.filtro) {
+        let exp = new RegExp(this.filtro.trim(), 'i')
+        return this.fotos.filter(foto => exp.test(foto.titulo))
+      }
+
+      return this.fotos
     }
   },
 
@@ -41,7 +54,9 @@ export default {
     api.get('/fotos')
       .then(res => this.fotos = res.data, error => console.log(error))
   }
-};
+
+}
+
 </script>
 
 <style>
