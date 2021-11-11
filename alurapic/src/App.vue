@@ -1,32 +1,31 @@
 <template>
   <div class="corpo">
 
-    <nav>
-      <ul>
-          <li :key="route.titulo" v-for="route in routes">
-            <router-link :to="route.path ? route.path : '/'">
-              {{ route.titulo }}
-            </router-link>
-          </li>
-      </ul>
-    </nav>
+    <meu-menu :rotas="routes" />
 
-    <router-view />
+    <transition name="pagina">
+      <router-view />
+    </transition>
 
   </div>
 </template>
 
 <script>
 
+import { Menu } from './components/shared'
 import { routes } from './routes'
 
 export default {
 
-  data() {
+  components:  {
+    'meu-menu' : Menu
+  },
+
+    data() {
     return {
       routes
     }
-  }
+  },
 
 }
 
@@ -37,6 +36,14 @@ export default {
     font-family: Helvetica, sans-serif;
     margin: 0 auto;
     width: 96%;
+  }
+
+  .pagina-enter, .pagina-leave-active {
+    opacity: 0;
+  }
+
+  .pagina-enter-active, .pagina-leave-active {
+    transition: opacity .2s;
   }
 
 </style>
