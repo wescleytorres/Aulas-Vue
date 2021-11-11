@@ -3,9 +3,21 @@
 </template>
 
 <script>
+['tipo', 'rotulo', 'confirmacao', 'estilo']
 export default {
 
-  props: ['tipo', 'rotulo', 'confirmacao', 'estilo'],
+  props: {
+    tipo: {
+      required: true,
+      type: String
+    },
+    rotulo: {
+      required: true,
+      type: String
+    },
+    confirmacao: Boolean,
+    estilo: String
+  },
 
   methods: {
 
